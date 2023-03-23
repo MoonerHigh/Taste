@@ -1,0 +1,3 @@
+# Project exclude paths
+/framework/common/target/
+/.idea/
