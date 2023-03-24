@@ -1,20 +1,23 @@
-package exception;
+package com.moonerhigh.framework.common.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import utils.ErrorCode;
+import com.moonerhigh.framework.common.utils.ErrorCode;
 
-/*
- * @description: 业务逻辑异常 Exception
- * @author: zpLone
- * @date: 2023/3/23 19:41
- **/
+/**
+ * @Author zpLone
+ * @Date 2023/3/21 22:03
+ * @PackageName:com.moonerhigh.framework.common.exception
+ * @ClassName: ServiceException
+ * @Description: 服务器异常 Exception
+ * @Version 1.0
+ */
 @Data
 @EqualsAndHashCode
-public final class ServerException extends RuntimeException{
+public final class ServiceException extends RuntimeException {
 
     /**
-     * 全局错误码
+     * 业务错误码
      *
      */
     private Integer code;
@@ -26,15 +29,15 @@ public final class ServerException extends RuntimeException{
     /**
      * 空构造方法，避免反序列化问题
      */
-    public ServerException() {
+    public ServiceException() {
     }
 
-    public ServerException(ErrorCode errorCode) {
+    public ServiceException(ErrorCode errorCode) {
         this.code = errorCode.getCode();
         this.message = errorCode.getMsg();
     }
 
-    public ServerException(Integer code, String message) {
+    public ServiceException(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -43,7 +46,7 @@ public final class ServerException extends RuntimeException{
         return code;
     }
 
-    public ServerException setCode(Integer code) {
+    public ServiceException setCode(Integer code) {
         this.code = code;
         return this;
     }
@@ -53,7 +56,7 @@ public final class ServerException extends RuntimeException{
         return message;
     }
 
-    public ServerException setMessage(String message) {
+    public ServiceException setMessage(String message) {
         this.message = message;
         return this;
     }

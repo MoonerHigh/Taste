@@ -1,7 +1,7 @@
-package utils;
+package com.moonerhigh.framework.common.utils;
 
 import lombok.Data;
-/*
+/**
  * @description: 错误码
  * @author: zpLone
  * @date: 2023/3/23 15:00

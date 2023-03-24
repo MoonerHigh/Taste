@@ -1,12 +1,12 @@
-package enums;
+package com.moonerhigh.framework.common.enums;
 
 
-import utils.ErrorCode;
+import com.moonerhigh.framework.common.utils.ErrorCode;
 
 /**
  * @Author zpLone
  * @Date 2023/3/21 21:46
- * @PackageName:com.moonerhigh.example.enums
+ * @PackageName:com.moonerhigh.framework.common.enums
  * @ClassName: GlobalErrorCodeConstants
  * @Description: 全局错误码枚举
  * @Version 1.0

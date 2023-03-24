@@ -1,9 +1,9 @@
-package utils;
+package com.moonerhigh.framework.common.utils;
 
 
-import enums.GlobalErrorCodeConstants;
-import exception.ServerException;
-import exception.ServiceException;
+import com.moonerhigh.framework.common.enums.GlobalErrorCodeConstants;
+import com.moonerhigh.framework.common.exception.ServerException;
+import com.moonerhigh.framework.common.exception.ServiceException;
 import lombok.Data;
 import org.springframework.util.Assert;
 
