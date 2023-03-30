@@ -17,7 +17,7 @@ import java.util.Objects;
  * @param <T> 数据泛型
  **/
 @Data
-public class Result<T> implements Serializable {
+public class CommonResult<T> implements Serializable {
 
     /**
      * 返回数据
@@ -37,32 +37,32 @@ public class Result<T> implements Serializable {
      *
      * 因为 A 方法返回的 Result 对象，不满足调用其的 B 方法的返回，所以需要进行转换。
      *
-     * @param result 传入的 result 对象
+     * @param commonResult 传入的 result 对象
      * @param <T> 返回的泛型
      * @return 新的 Result 对象
      */
-    public static <T> Result<T> error(Result<?> result) {
-        return error(result.getCode(), result.getMsg());
+    public static <T> CommonResult<T> error(CommonResult<?> commonResult) {
+        return error(commonResult.getCode(), commonResult.getMsg());
     }
 
-    public static <T> Result<T> error(Integer code, String message) {
+    public static <T> CommonResult<T> error(Integer code, String message) {
         Assert.isTrue(!GlobalErrorCodeConstants.SUCCESS.getCode().equals(code), "code 必须是错误的！");
-        Result<T> result = new Result<>();
-        result.code = code;
-        result.msg = message;
-        return result;
+        CommonResult<T> commonResult = new CommonResult<>();
+        commonResult.code = code;
+        commonResult.msg = message;
+        return commonResult;
     }
 
-    public static <T> Result<T> error(ErrorCode errorCode) {
+    public static <T> CommonResult<T> error(ErrorCode errorCode) {
         return error(errorCode.getCode(), errorCode.getMsg());
     }
 
-    public static <T> Result<T> success(T data) {
-        Result<T> result = new Result<>();
-        result.code = GlobalErrorCodeConstants.SUCCESS.getCode();
-        result.data = data;
-        result.msg = "";
-        return result;
+    public static <T> CommonResult<T> success(T data) {
+        CommonResult<T> commonResult = new CommonResult<>();
+        commonResult.code = GlobalErrorCodeConstants.SUCCESS.getCode();
+        commonResult.data = data;
+        commonResult.msg = "";
+        return commonResult;
     }
 
     public static boolean isSuccess(Integer code) {
@@ -105,7 +105,7 @@ public class Result<T> implements Serializable {
         return data;
     }
 
-    public static <T> Result<T> error(ServiceException serviceException) {
+    public static <T> CommonResult<T> error(ServiceException serviceException) {
         return error(serviceException.getCode(), serviceException.getMessage());
     }
 }
