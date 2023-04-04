@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>framework</module>
-        <module>admin</module>
+        <module>taste-server</module>
     </modules>
 
     <properties>
