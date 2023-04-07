@@ -1,4 +1,4 @@
-package com.moonerghig.taste.admin;
+package com.moonerhigh.taste.admin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

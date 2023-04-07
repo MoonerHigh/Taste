@@ -1,3 +1,4 @@
 # Project exclude paths
 /framework/common/target/
 /.idea/
+/taste-server/target/

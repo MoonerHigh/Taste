@@ -1,2 +1,16 @@
+spring:
+  application:
+    name: taste-server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: zpl25809
+  data:
+    redis:
+      database: 0
+      host: 127.0.0.1
+      port: 6379
+      password:
+
 server:
-  port: 8080
+  port: 8888
