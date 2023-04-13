@@ -1,4 +1,4 @@
-package com.moonerhigh.taste.admin.config;
+package com.moonerhigh.taste.server.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @Author zpLone
  * @Date 2023/4/12 18:51
- * @PackageName:com.moonerhigh.taste.admin.config
+ * @PackageName:com.moonerhigh.taste.server.config
  * @ClassName: MyBatisPlusConfig
  * @Description: MybatisPlus配置类
  * @Version 1.0

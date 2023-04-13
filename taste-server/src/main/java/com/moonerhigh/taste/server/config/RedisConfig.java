@@ -1,4 +1,4 @@
-package com.moonerhigh.taste.admin.config;
+package com.moonerhigh.taste.server.config;
 
 import com.alibaba.fastjson2.support.spring6.data.redis.GenericFastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 /**
  * @Author zpLone
  * @Date 2023/4/6 18:05
- * @PackageName:com.moonerhigh.taste.admin.config
+ * @PackageName:com.moonerhigh.taste.server.config
  * @ClassName: RedisConfig
  * @Description: Redis配置类
  * @Version 1.0

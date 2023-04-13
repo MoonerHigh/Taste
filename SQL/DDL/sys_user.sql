@@ -13,9 +13,9 @@ CREATE TABLE `sys_user` (
                             `super_admin` tinyint unsigned DEFAULT NULL COMMENT '超级管理员   0：否   1：是',
                             `status` tinyint DEFAULT NULL COMMENT '状态  0：停用   1：正常',
                             `creator` bigint DEFAULT NULL COMMENT '创建者',
-                            `create_date` datetime DEFAULT NULL COMMENT '创建时间',
+                            `create_time` datetime DEFAULT NULL COMMENT '创建时间',
                             `updater` bigint DEFAULT NULL COMMENT '更新者',
-                            `update_date` datetime DEFAULT NULL COMMENT '更新时间',
+                            `update_time` datetime DEFAULT NULL COMMENT '更新时间',
                             PRIMARY KEY (`id`) USING BTREE,
                             UNIQUE KEY `uk_username` (`username`) USING BTREE,
                             KEY `idx_create_date` (`create_date`) USING BTREE
