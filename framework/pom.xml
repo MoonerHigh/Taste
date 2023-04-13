@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>common</module>
+        <module>framework-security</module>
     </modules>
     <dependencies>
         <dependency>
@@ -51,6 +52,11 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
 </project>

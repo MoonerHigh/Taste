@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
  * @Date 2023/4/13 16:28
  * @PackageName:com.moonerhigh.taste.server.config
  * @ClassName: MyBatisPlusAutoFill
- * @Description: create_time和update——time自动填充
+ * @Description: create_time和update_time自动填充
  * @Version 1.0
  */
 @Component
 public class MyBatisPlusAutoFill implements MetaObjectHandler {
+
     @Override
     public void insertFill(MetaObject metaObject) {
         if (this.getFieldValByName("createTime", metaObject) == null) {

@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Description: 管理后台启动类
  * @Version 1.0
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.moonerhigh")
 public class TasteServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(TasteServerApplication.class);
