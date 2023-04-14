@@ -1,4 +1,4 @@
-package com.moonerhigh.framework.common.enums;
+package com.moonerhigh.framework.common.utils;
 
 import lombok.Data;
 /**
