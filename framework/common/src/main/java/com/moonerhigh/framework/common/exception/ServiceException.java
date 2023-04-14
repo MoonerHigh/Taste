@@ -2,7 +2,7 @@ package com.moonerhigh.framework.common.exception;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import com.moonerhigh.framework.common.utils.ErrorCode;
+import com.moonerhigh.framework.common.enums.ErrorCode;
 
 /**
  * @Author zpLone

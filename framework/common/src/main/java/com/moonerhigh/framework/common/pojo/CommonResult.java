@@ -1,7 +1,8 @@
-package com.moonerhigh.framework.common.utils;
+package com.moonerhigh.framework.common.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.moonerhigh.framework.common.enums.ErrorCode;
 import com.moonerhigh.framework.common.enums.GlobalErrorCodeConstants;
 import com.moonerhigh.framework.common.exception.ServerException;
 import com.moonerhigh.framework.common.exception.ServiceException;

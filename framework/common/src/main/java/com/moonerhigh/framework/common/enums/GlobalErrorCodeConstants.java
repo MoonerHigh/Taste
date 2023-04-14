@@ -1,8 +1,6 @@
 package com.moonerhigh.framework.common.enums;
 
 
-import com.moonerhigh.framework.common.utils.ErrorCode;
-
 /**
  * @Author zpLone
  * @Date 2023/3/21 21:46
