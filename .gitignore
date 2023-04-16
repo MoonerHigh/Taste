@@ -2,3 +2,5 @@
 /framework/common/target/
 /.idea/
 /taste-server/target/
+/framework/framework-common/target/
+/framework/framework-security/target/
