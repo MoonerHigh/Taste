@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @Version 1.0
  */
 @Configuration
-@MapperScan("com.moonerhigh.taste.server.mapper")
+@MapperScan("com.moonerhigh.**.mapper")
 public class MyBatisPlusConfig {
 
     @Bean

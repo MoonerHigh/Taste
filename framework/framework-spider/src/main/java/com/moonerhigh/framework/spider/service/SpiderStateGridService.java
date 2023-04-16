@@ -10,6 +10,10 @@ import com.moonerhigh.framework.spider.entity.SpiderStateGrid;
  * @since 2023-04-16 17:56:25
  */
 public interface SpiderStateGridService extends IService<SpiderStateGrid> {
-    void getInfo();
+
+    /**
+     * 获取第一页数据
+     */
+    void getPage1();
 }
 

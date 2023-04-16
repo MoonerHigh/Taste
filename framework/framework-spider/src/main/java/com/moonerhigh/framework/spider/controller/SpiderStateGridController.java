@@ -2,7 +2,6 @@ package com.moonerhigh.framework.spider.controller;
 
 import com.moonerhigh.framework.spider.service.SpiderStateGridService;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +21,8 @@ public class SpiderStateGridController {
     @Resource
     private SpiderStateGridService spiderStateGridService;
 
-    @GetMapping("/getInfo")
-    public void getInfo(){
-        spiderStateGridService.getInfo();
+    @GetMapping("/getPage1")
+    public void getPage1(){
+        spiderStateGridService.getPage1();
     }
 }

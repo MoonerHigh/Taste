@@ -1,6 +1,5 @@
 package com.moonerhigh.framework.spider.service.impl;
 
-import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.moonerhigh.framework.spider.entity.SpiderStateGrid;
 import com.moonerhigh.framework.spider.mapper.SpiderStateGridMapper;
@@ -32,7 +31,7 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
     @Override
     @SneakyThrows
     @Transactional(rollbackFor = Exception.class)
-    public void getInfo() {
+    public void getPage1() {
         Document document;
         document = Jsoup.connect(URL).get();
         String title = document.title();
