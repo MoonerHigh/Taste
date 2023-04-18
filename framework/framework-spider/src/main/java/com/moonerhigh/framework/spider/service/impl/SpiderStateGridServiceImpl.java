@@ -2,8 +2,10 @@ package com.moonerhigh.framework.spider.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.moonerhigh.framework.spider.entity.SpiderStateGrid;
+import com.moonerhigh.framework.spider.enums.SpiderEnum;
 import com.moonerhigh.framework.spider.mapper.SpiderStateGridMapper;
 import com.moonerhigh.framework.spider.service.SpiderStateGridService;
+import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -13,7 +15,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
+import java.util.*;
 
 import static com.moonerhigh.framework.spider.constants.Const.*;
 import static com.moonerhigh.framework.spider.utils.SplitUtil.extractInfo;
@@ -28,6 +30,10 @@ import static com.moonerhigh.framework.spider.utils.SplitUtil.extractInfo;
 @Slf4j
 @Service("spiderStateGridService")
 public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMapper, SpiderStateGrid> implements SpiderStateGridService {
+
+    @Resource
+    SpiderStateGridMapper spiderStateGridMapper;
+
     @Override
     @SneakyThrows
     @Transactional(rollbackFor = Exception.class)
@@ -35,23 +41,36 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         Document document;
         document = Jsoup.connect(URL).get();
         String title = document.title();
-        log.info("文章标题 {}", title);
+        log.info("文章标题:{}", title);
         Document doc = Jsoup.parse(document.body().html());
         Elements elements = doc.select("div span");
-        getMap(INFO_REGEX, elements);
+        Map<String, String> releaseInfoMap = getMap(INFO_REGEX, elements);
+        log.info("发布信息{}", releaseInfoMap);
         Elements divP = doc.select("div p");
-        getMap(ADDRESS_REGEX, divP);
+        Map<String, String> addressMap = getMap(ADDRESS_REGEX, divP);
+        log.info("地址信息{}", addressMap);
+        // map合并
+        addressMap.putAll(releaseInfoMap);
+        SpiderStateGrid spiderStateGrid = new SpiderStateGrid();
+        spiderStateGrid.setArticleUrl(URL);
+        spiderStateGrid.setTitle(title);
+        spiderStateGrid.setReleaseDate(addressMap.get(SpiderEnum.RELEASE_DATE.getName()));
+        spiderStateGrid.setInfoSources(addressMap.get(SpiderEnum.INFO_SOURCES.getName()));
+        spiderStateGrid.setCompanyAddr(addressMap.get(SpiderEnum.COMPANY_ADDR.getName()));
+        spiderStateGrid.setFaxNo(addressMap.get(SpiderEnum.FAX_NO.getName()));
+        spiderStateGrid.setPhoneNo(addressMap.get(SpiderEnum.PHONE_NO.getName()));
+        spiderStateGridMapper.insert(spiderStateGrid);
     }
 
-    private static void getMap(String addressRegex, Elements divP) {
+    private Map<String, String> getMap(String addressRegex, Elements divP) {
+        Map<String, String> infoMap = null;
         for (Element element : divP) {
-            Map<String, String> infoMap = extractInfo(element.text(), addressRegex);
-            for (Map.Entry<String, String> entry : infoMap.entrySet()) {
-                log.info(entry.getKey(), entry.getKey());
+            infoMap = extractInfo(element.text(), addressRegex);
+            if (!infoMap.isEmpty()) {
+                return infoMap;
             }
         }
+        return infoMap;
     }
 
 }
-
-
