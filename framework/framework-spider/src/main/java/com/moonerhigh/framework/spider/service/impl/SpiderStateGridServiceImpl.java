@@ -29,6 +29,7 @@ import static com.moonerhigh.framework.spider.utils.SplitUtil.extractInfo;
 
 @Slf4j
 @Service("spiderStateGridService")
+@Transactional(rollbackFor = Exception.class)
 public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMapper, SpiderStateGrid> implements SpiderStateGridService {
 
     @Resource
@@ -36,10 +37,9 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
 
     @Override
     @SneakyThrows
-    @Transactional(rollbackFor = Exception.class)
     public void getPage1() {
         Document document;
-        document = Jsoup.connect(URL).get();
+        document = Jsoup.connect(URL_1).get();
         String title = document.title();
         log.info("文章标题:{}", title);
         Document doc = Jsoup.parse(document.body().html());
@@ -52,7 +52,7 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         // map合并
         addressMap.putAll(releaseInfoMap);
         SpiderStateGrid spiderStateGrid = new SpiderStateGrid();
-        spiderStateGrid.setArticleUrl(URL);
+        spiderStateGrid.setArticleUrl(URL_1);
         spiderStateGrid.setTitle(title);
         spiderStateGrid.setReleaseDate(addressMap.get(SpiderEnum.RELEASE_DATE.getName()));
         spiderStateGrid.setInfoSources(addressMap.get(SpiderEnum.INFO_SOURCES.getName()));
@@ -62,10 +62,37 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         spiderStateGridMapper.insert(spiderStateGrid);
     }
 
-    private Map<String, String> getMap(String addressRegex, Elements divP) {
+    @SneakyThrows
+    public void getPage2(){
+        Document document;
+        document = Jsoup.connect(URL_1).get();
+        String title = document.title();
+        String html = document.body().html();
+        System.out.println("文章标题:" + title);
+        Document doc = Jsoup.parse(html);
+        Elements elements = doc.select("div > p > img[src]");
+        for (Element element : elements) {
+            String src = element.attr("src");
+            SpiderStateGrid spiderStateGrid = new SpiderStateGrid();
+            spiderStateGrid.setTitle(title);
+            spiderStateGrid.setArticleUrl(URL_2);
+            spiderStateGrid.setImageUrl(new StringBuilder().append(BASE_URL).append(src).toString());
+            spiderStateGridMapper.insert(spiderStateGrid);
+        }
+    }
+
+    /**
+     * @param divP
+     * @description: 页面元素转Map
+     * @author: zpLone
+     * @date: 2023/4/18 20:04
+     * @param: * @param 正则表达式
+     * @return: {@link Map< String, String>}
+     **/
+    private Map<String, String> getMap(String regex, Elements divP) {
         Map<String, String> infoMap = null;
         for (Element element : divP) {
-            infoMap = extractInfo(element.text(), addressRegex);
+            infoMap = extractInfo(element.text(), regex);
             if (!infoMap.isEmpty()) {
                 return infoMap;
             }

@@ -1,11 +1,10 @@
 package com.moonerhigh.framework.spider.entity;
 
 import java.util.Date;
+
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
  * (SpiderStateGrid)表实体类
@@ -30,7 +29,7 @@ public class SpiderStateGrid extends Model<SpiderStateGrid> {
     //公司地址
     private String companyAddr;
     //图片链接
-    private String pictureUrl;
+    private String imageUrl;
     //文件地址
     private String fileUrl;
     //邮箱
@@ -48,135 +47,5 @@ public class SpiderStateGrid extends Model<SpiderStateGrid> {
     //备注
     private String remark;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getArticleUrl() {
-        return articleUrl;
-    }
-
-    public void setArticleUrl(String articleUrl) {
-        this.articleUrl = articleUrl;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public String getInfoSources() {
-        return infoSources;
-    }
-
-    public void setInfoSources(String infoSources) {
-        this.infoSources = infoSources;
-    }
-
-    public String getCompanyAddr() {
-        return companyAddr;
-    }
-
-    public void setCompanyAddr(String companyAddr) {
-        this.companyAddr = companyAddr;
-    }
-
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
-
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
-
-    public String getFileUrl() {
-        return fileUrl;
-    }
-
-    public void setFileUrl(String fileUrl) {
-        this.fileUrl = fileUrl;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getFaxNo() {
-        return faxNo;
-    }
-
-    public void setFaxNo(String faxNo) {
-        this.faxNo = faxNo;
-    }
-
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(String deleted) {
-        this.deleted = deleted;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    /**
-     * 获取主键值
-     *
-     * @return 主键值
-     */
-    @Override
-    public Serializable pkVal() {
-        return this.id;
-    }
-    }
+}
 
