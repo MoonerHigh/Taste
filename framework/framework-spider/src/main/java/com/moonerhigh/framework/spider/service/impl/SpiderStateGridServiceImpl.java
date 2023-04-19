@@ -2,7 +2,8 @@ package com.moonerhigh.framework.spider.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.moonerhigh.framework.spider.entity.SpiderStateGrid;
-import com.moonerhigh.framework.spider.enums.SpiderEnum;
+import com.moonerhigh.framework.spider.enums.ElementEnum;
+import com.moonerhigh.framework.spider.enums.URLEnum;
 import com.moonerhigh.framework.spider.mapper.SpiderStateGridMapper;
 import com.moonerhigh.framework.spider.service.SpiderStateGridService;
 import jakarta.annotation.Resource;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 import static com.moonerhigh.framework.spider.constants.Const.*;
-import static com.moonerhigh.framework.spider.utils.SplitUtil.extractInfo;
+import static com.moonerhigh.framework.spider.utils.SplitUtil.getMapByRegex;
 
 /**
  * (SpiderStateGrid)表服务实现类
@@ -39,36 +40,36 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
     @SneakyThrows
     public void getPage1() {
         Document document;
-        document = Jsoup.connect(URL_1).get();
+        document = Jsoup.connect(URLEnum.OFFICE_ADDRESS_AND_CONTACT_INFORMATION.getValue()).get();
         String title = document.title();
         log.info("文章标题:{}", title);
         Document doc = Jsoup.parse(document.body().html());
         String remark = doc.select("div > h1 > span[objid]").stream().findFirst().get().text();
         log.info("页面标题{}", remark);
         Elements spans = doc.select("div span");
-        Map<String, String> releaseInfoMap = getMap(INFO_REGEX, spans);
+        Map<String, String> releaseInfoMap = getMapByRegex(INFO_REGEX, spans);
         log.info("发布信息{}", releaseInfoMap);
         Elements divP = doc.select("div p");
-        Map<String, String> addressMap = getMap(ADDRESS_REGEX, divP);
+        Map<String, String> addressMap = getMapByRegex(ADDRESS_REGEX, divP);
         log.info("地址信息{}", addressMap);
         // map合并
         addressMap.putAll(releaseInfoMap);
-        SpiderStateGrid spiderStateGrid = new SpiderStateGrid();
-        spiderStateGrid.setArticleUrl(URL_1);
-        spiderStateGrid.setTitle(title);
-        spiderStateGrid.setReleaseDate(addressMap.get(SpiderEnum.RELEASE_DATE.getName()));
-        spiderStateGrid.setInfoSources(addressMap.get(SpiderEnum.INFO_SOURCES.getName()));
-        spiderStateGrid.setCompanyAddr(addressMap.get(SpiderEnum.COMPANY_ADDR.getName()));
-        spiderStateGrid.setFaxNo(addressMap.get(SpiderEnum.FAX_NO.getName()));
-        spiderStateGrid.setPhoneNo(addressMap.get(SpiderEnum.PHONE_NO.getName()));
-        spiderStateGrid.setRemark(remark);
+        SpiderStateGrid spiderStateGrid = new SpiderStateGrid()
+                .setArticleUrl(URLEnum.OFFICE_ADDRESS_AND_CONTACT_INFORMATION.getValue())
+                .setTitle(title)
+                .setReleaseDate(addressMap.get(ElementEnum.RELEASE_DATE.getName()))
+                .setInfoSources(addressMap.get(ElementEnum.INFO_SOURCES.getName()))
+                .setCompanyAddr(addressMap.get(ElementEnum.COMPANY_ADDR.getName()))
+                .setFaxNo(addressMap.get(ElementEnum.FAX_NO.getName()))
+                .setPhoneNo(addressMap.get(ElementEnum.PHONE_NO.getName()))
+                .setRemark(remark);
         spiderStateGridMapper.insert(spiderStateGrid);
     }
 
     @SneakyThrows
-    public void getPage2() {
+    public void getHtmlImage() {
         Document document;
-        document = Jsoup.connect(URL_1).get();
+        document = Jsoup.connect(URLEnum.COMPANY_QUALIFICATION.getValue()).get();
         String title = document.title();
         String html = document.body().html();
         log.info("文章标题{}", title);
@@ -77,24 +78,24 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         log.info("页面标题{}", remark);
         Elements divs = doc.select("div > p > img[src]");
         Elements spans = doc.select("div span");
-        Map<String, String> releaseInfoMap = getMap(INFO_REGEX, spans);
+        Map<String, String> releaseInfoMap = getMapByRegex(INFO_REGEX, spans);
         for (Element element : divs) {
             String src = element.attr("src");
-            SpiderStateGrid spiderStateGrid = new SpiderStateGrid();
-            spiderStateGrid.setTitle(title);
-            spiderStateGrid.setArticleUrl(URL_2);
-            spiderStateGrid.setImageUrl(new StringBuilder().append(BASE_URL).append(src).toString());
-            spiderStateGrid.setRemark(remark);
-            spiderStateGrid.setReleaseDate(releaseInfoMap.get(SpiderEnum.RELEASE_DATE.getName()));
-            spiderStateGrid.setInfoSources(releaseInfoMap.get(SpiderEnum.INFO_SOURCES.getName()));
+            SpiderStateGrid spiderStateGrid = new SpiderStateGrid()
+                    .setTitle(title)
+                    .setArticleUrl(URLEnum.COMPANY_QUALIFICATION.getValue())
+                    .setImageUrl(new StringBuilder().append(BASE_URL).append(src).toString())
+                    .setRemark(remark)
+                    .setReleaseDate(releaseInfoMap.get(ElementEnum.RELEASE_DATE.getName()))
+                    .setInfoSources(releaseInfoMap.get(ElementEnum.INFO_SOURCES.getName()));
             spiderStateGridMapper.insert(spiderStateGrid);
         }
     }
 
     @SneakyThrows
-    public void getPage3(){
+    public void getHtmlFile() {
         Document document;
-        document = Jsoup.connect(URL_1).get();
+        document = Jsoup.connect(URLEnum.BUSINESS_OUTLET_INFORMATION.getValue()).get();
         String title = document.title();
         String html = document.body().html();
         log.info("文章标题{}", title);
@@ -103,37 +104,48 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         log.info("页面标题{}", remark);
         Elements divs = doc.select("div > p > a[data_ue_src]");
         Elements spans = doc.select("div span");
-        Map<String, String> releaseInfoMap = getMap(INFO_REGEX, spans);
+        Map<String, String> releaseInfoMap = getMapByRegex(INFO_REGEX, spans);
         for (Element element : divs) {
             String fileUrl = element.attr("data_ue_src");
-            SpiderStateGrid spiderStateGrid = new SpiderStateGrid();
-            spiderStateGrid.setTitle(title);
-            spiderStateGrid.setArticleUrl(URL_3);
-            spiderStateGrid.setFileUrl(new StringBuilder().append(BASE_URL).append(fileUrl).toString());
-            spiderStateGrid.setRemark(remark);
-            spiderStateGrid.setReleaseDate(releaseInfoMap.get(SpiderEnum.RELEASE_DATE.getName()));
-            spiderStateGrid.setInfoSources(releaseInfoMap.get(SpiderEnum.INFO_SOURCES.getName()));
+            SpiderStateGrid spiderStateGrid = new SpiderStateGrid()
+                    .setTitle(title)
+                    .setArticleUrl(URLEnum.BUSINESS_OUTLET_INFORMATION.getValue())
+                    .setFileUrl(new StringBuilder().append(BASE_URL).append(fileUrl).toString())
+                    .setRemark(remark)
+                    .setReleaseDate(releaseInfoMap.get(ElementEnum.RELEASE_DATE.getName()))
+                    .setInfoSources(releaseInfoMap.get(ElementEnum.INFO_SOURCES.getName()));
             spiderStateGridMapper.insert(spiderStateGrid);
         }
     }
 
-    /**
-     * @param divP
-     * @description: 页面元素转Map
-     * @author: zpLone
-     * @date: 2023/4/18 20:04
-     * @param: * @param 正则表达式
-     * @return: {@link Map< String, String>}
-     **/
-    private Map<String, String> getMap(String regex, Elements divP) {
-        Map<String, String> infoMap = null;
-        for (Element element : divP) {
-            infoMap = extractInfo(element.text(), regex);
-            if (!infoMap.isEmpty()) {
-                return infoMap;
-            }
+    // 爬取页面4
+    @SneakyThrows
+    public void getNotice() {
+        Document document;
+        document = Jsoup.connect(URLEnum.REGULAR_REGULATIONS.getValue()).get();
+        String title = document.title();
+        String html = document.body().html();
+        log.info("文章标题{}", title);
+        Document doc = Jsoup.parse(html);
+        String remark = doc.select("div > h1 > span[objid]").stream().findFirst().get().text();
+        log.info("页面标题{}", remark);
+        // div[objid=6014]
+        Elements spans = doc.select("div p span");
+        StringBuilder stringBuilder = new StringBuilder();
+        String notice = null;
+        Map<String, String> releaseInfoMap = getMapByRegex(INFO_REGEX, spans);
+        for (Element element : spans) {
+            notice = stringBuilder.append(element.text()).toString();
         }
-        return infoMap;
+        log.info("正文{}", notice);
+        SpiderStateGrid spiderStateGrid = new SpiderStateGrid()
+                .setTitle(title)
+                .setRemark(remark)
+                .setArticleContent(notice)
+                .setArticleUrl(URLEnum.REGULAR_REGULATIONS.getValue())
+                .setReleaseDate(releaseInfoMap.get(ElementEnum.RELEASE_DATE.getName()))
+                .setInfoSources(releaseInfoMap.get(ElementEnum.INFO_SOURCES.getName()));
+        spiderStateGridMapper.insert(spiderStateGrid);
     }
 
 }

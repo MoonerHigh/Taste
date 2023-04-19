@@ -12,12 +12,6 @@ public class Const {
 
     public static final String BASE_URL = "http://www.js.sgcc.com.cn";
 
-    public static final String URL_1 = "http://www.js.sgcc.com.cn/html/szgdgs/col2882/2020-09/25/20200925123454087954196_1.html";
-
-    public static final String URL_2 = "http://www.js.sgcc.com.cn/html/szgdgs/col2882/2021-10/18/20211018175232066138978_1.html";
-
-    public static final String URL_3 = "http://www.js.sgcc.com.cn/html/szgdgs/col2882/2019-07/19/20190719154004592917345_1.html";
-
     public static final String ADDRESS_REGEX = "(公司地址|邮 箱|传 真|联 系 电 话)：([^\\s]+)";
 
     public static final String INFO_REGEX = "(发布日期|信息来源)：\\s*([^\\\\s]+)";

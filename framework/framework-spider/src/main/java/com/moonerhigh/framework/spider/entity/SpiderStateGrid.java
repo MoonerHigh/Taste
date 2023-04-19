@@ -22,6 +22,8 @@ public class SpiderStateGrid extends Model<SpiderStateGrid> {
     private String articleUrl;
     //文章标题
     private String title;
+    // 正文
+    private String articleContent;
     //发布日期
     private String releaseDate;
     //文章来源

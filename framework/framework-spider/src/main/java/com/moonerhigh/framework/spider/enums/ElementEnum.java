@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum SpiderEnum {
+public enum ElementEnum {
 
     RELEASE_DATE("发布日期","release_date"),
     INFO_SOURCES("文章来源","info_sources"),
