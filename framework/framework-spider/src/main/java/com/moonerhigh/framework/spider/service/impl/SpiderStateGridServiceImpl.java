@@ -90,7 +90,7 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
                     .setImageUrl(new StringBuilder().append(BASE_URL).append(src).toString())
                     .setRemark(remark)
                     .setReleaseDate(releaseDate)
-                    .setAuthor(releaseInfoMap.get(author));
+                    .setAuthor(author);
             spiderStateGridMapper.insert(spiderStateGrid);
         }
     }
