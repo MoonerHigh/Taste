@@ -5,6 +5,7 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @Author zpLone
@@ -26,6 +27,6 @@ public class MyBatisPlusAutoFill implements MetaObjectHandler {
 
     @Override
     public void updateFill(MetaObject metaObject) {
-            this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
+        this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
     }
 }

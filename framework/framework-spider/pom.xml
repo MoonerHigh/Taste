@@ -9,14 +9,15 @@
     <artifactId>framework-spider</artifactId>
     <properties>
         <jsoup.version>1.15.4</jsoup.version>
+        <commons-io.version>1.3.2</commons-io.version>
     </properties>
     <dependencies>
 
-<!--        <dependency>-->
-<!--            <groupId>com.moonerhigh</groupId>-->
-<!--            <artifactId>framework-common</artifactId>-->
-<!--            <version>1.0-SNAPSHOT</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.baomidou</groupId>

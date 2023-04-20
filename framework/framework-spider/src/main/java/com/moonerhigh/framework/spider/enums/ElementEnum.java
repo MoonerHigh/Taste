@@ -7,7 +7,7 @@ import lombok.Getter;
  * @Author zpLone
  * @Date 2023/4/17 14:37
  * @PackageName:com.moonerhigh.framework.spider.enums
- * @ClassName: SpiderUnum
+ * @ClassName: SpiderEnum
  * @Description: 爬虫枚举
  * @Version 1.0
  */
