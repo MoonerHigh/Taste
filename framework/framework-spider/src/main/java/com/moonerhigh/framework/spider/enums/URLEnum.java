@@ -44,9 +44,9 @@ public enum URLEnum {
 
     SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_2("苏州电网受限接入配电线路清单","http://www.js.sgcc.com.cn/html/szgdgs/col2884/2022-07/19/20220719182329213534654_1.html"),
 
-    LIST_OF_RESTRICTED_ACCESS_DISTRIBUTION_LINES_IN_SUZHOU_POWER_GRID_3("苏州电网受限接入配电线路清单","http://www.js.sgcc.com.cn/html/szgdgs/col2884/2023-02/09/20230209174359204727439_1.html"),
+    SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_3("苏州电网受限接入配电线路清单","http://www.js.sgcc.com.cn/html/szgdgs/col2884/2023-02/09/20230209174359204727439_1.html"),
 
-    LIST_OF_RESTRICTED_ACCESS_DISTRIBUTION_LINES_IN_SUZHOU_POWER_GRID_4("苏州电网受限接入配电线路清单","http://www.js.sgcc.com.cn/html/szgdgs/col2884/2023-02/09/20230209174612717928975_1.html");
+    SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_4("苏州电网受限接入配电线路清单","http://www.js.sgcc.com.cn/html/szgdgs/col2884/2023-02/09/20230209174612717928975_1.html");
 
     private final String name;
 

@@ -21,8 +21,8 @@ public class SpiderStateGridController {
     @Resource
     private SpiderStateGridService spiderStateGridService;
 
-    @GetMapping("/getPage1")
-    public void getPage1(){
-        spiderStateGridService.getPage1();
+    @GetMapping("/spider")
+    public void spider(){
+        spiderStateGridService.spider();
     }
 }

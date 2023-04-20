@@ -35,7 +35,6 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
     @Resource
     SpiderStateGridMapper spiderStateGridMapper;
 
-    @Override
     @SneakyThrows
     public void getPage1() {
         Document document;
@@ -63,9 +62,9 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
     }
 
     @SneakyThrows
-    public void getHtmlImage() {
+    public void getHtmlImage(String url) {
         Document document;
-        document = Jsoup.connect(URLEnum.COMPANY_QUALIFICATION.getValue()).get();
+        document = Jsoup.connect(url).get();
         String title = document.title();
         String html = document.body().html();
         log.info("文章标题{}", title);
@@ -73,12 +72,11 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         String remark = doc.select("div > h1 > span[objid]").stream().findFirst().get().text();
         log.info("页面标题{}", remark);
         Elements divs = doc.select("div > p > img[src]");
-        Elements spans = doc.select("div span");
         String releaseDate = doc.select("span[objparam='fieldname:DateTime']").first().text();
         String author = doc.select("span[objparam='fieldname:Author']").first().text();
-        Map<String, String> releaseInfoMap = getMapByRegex(INFO_REGEX, spans);
         for (Element element : divs) {
             String src = element.attr("src");
+            log.info("图片链接:{}",src);
             SpiderStateGrid spiderStateGrid = new SpiderStateGrid()
                     .setTitle(title)
                     .setArticleUrl(URLEnum.COMPANY_QUALIFICATION.getValue())
@@ -91,9 +89,9 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
     }
 
     @SneakyThrows
-    public void getHtmlFile() {
+    public void getHtmlFile(String url) {
         Document document;
-        document = Jsoup.connect(URLEnum.BUSINESS_OUTLET_INFORMATION.getValue()).get();
+        document = Jsoup.connect(url).get();
         String title = document.title();
         String html = document.body().html();
         log.info("文章标题{}", title);
@@ -117,9 +115,9 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
     }
 
     @SneakyThrows
-    public void getNotice() {
+    public void getNotice(String url) {
         Document document;
-        document = Jsoup.connect(URLEnum.REGULAR_REGULATIONS.getValue()).get();
+        document = Jsoup.connect(url).get();
         String title = document.title();
         String html = document.body().html();
         log.info("文章标题{}", title);
@@ -146,5 +144,33 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         spiderStateGridMapper.insert(spiderStateGrid);
     }
 
+    @Override
+    public void spider(){
+        getPage1();
+        List<String> images = new ArrayList<>();
+        images.add(URLEnum.COMPANY_QUALIFICATION.getValue());
+        images.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_1.getValue());
+        images.add(URLEnum.MANAGEMENT_MEASURES_FOR_ELECTRIC_POWER_RELIABILITY.getValue());
+        images.stream().forEach(image->{
+            getHtmlImage(image);
+        });
+        List<String> files = new ArrayList<>();
+        files.add(URLEnum.BUSINESS_OUTLET_INFORMATION.getValue());
+        files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_1.getValue());
+        files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_2.getValue());
+        files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_3.getValue());
+        files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_4.getValue());
+        files.stream().forEach(file->{
+            getHtmlFile(file);
+        });
+        List<String> notices = new ArrayList<>();
+        notices.add(URLEnum.POWER_SUPPLY_QUALITY_STANDARD.getValue());
+        notices.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_2.getValue());
+        notices.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_3.getValue());
+        notices.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_4.getValue());
+        files.stream().forEach(notice ->{
+            getNotice(notice);
+        });
+    }
 
 }
