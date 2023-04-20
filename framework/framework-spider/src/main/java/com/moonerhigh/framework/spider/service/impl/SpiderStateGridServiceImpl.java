@@ -2,14 +2,12 @@ package com.moonerhigh.framework.spider.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.moonerhigh.framework.spider.entity.SpiderStateGrid;
-import com.moonerhigh.framework.spider.enums.ElementEnum;
 import com.moonerhigh.framework.spider.enums.URLEnum;
 import com.moonerhigh.framework.spider.mapper.SpiderStateGridMapper;
 import com.moonerhigh.framework.spider.service.SpiderStateGridService;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -17,8 +15,6 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.net.URL;
 import java.util.*;
 
 import static com.moonerhigh.framework.spider.constants.Const.*;
@@ -54,15 +50,14 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         Elements divP = doc.select("div p");
         Map<String, String> addressMap = getMapByRegex(ADDRESS_REGEX, divP);
         log.info("地址信息{}", addressMap);
-        // map合并
         SpiderStateGrid spiderStateGrid = new SpiderStateGrid()
                 .setArticleUrl(URLEnum.OFFICE_ADDRESS_AND_CONTACT_INFORMATION.getValue())
                 .setTitle(title)
                 .setReleaseDate(releaseDate)
                 .setAuthor(author)
-                .setCompanyAddr(addressMap.get(ElementEnum.COMPANY_ADDR.getName()))
-                .setFaxNo(addressMap.get(ElementEnum.FAX_NO.getName()))
-                .setPhoneNo(addressMap.get(ElementEnum.PHONE_NO.getName()))
+                .setCompanyAddr(addressMap.get("公司地址"))
+                .setFaxNo(addressMap.get("传 真"))
+                .setPhoneNo(addressMap.get("联 系 电 话"))
                 .setRemark(remark);
         spiderStateGridMapper.insert(spiderStateGrid);
     }
