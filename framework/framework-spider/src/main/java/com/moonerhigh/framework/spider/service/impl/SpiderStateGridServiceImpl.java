@@ -76,10 +76,10 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         String author = doc.select("span[objparam='fieldname:Author']").first().text();
         for (Element element : divs) {
             String src = element.attr("src");
-            log.info("图片链接:{}",src);
+            log.info("图片链接:{}", src);
             SpiderStateGrid spiderStateGrid = new SpiderStateGrid()
                     .setTitle(title)
-                    .setArticleUrl(URLEnum.COMPANY_QUALIFICATION.getValue())
+                    .setArticleUrl(url)
                     .setImageUrl(new StringBuilder().append(BASE_URL).append(src).toString())
                     .setRemark(remark)
                     .setReleaseDate(releaseDate)
@@ -101,15 +101,17 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         Elements divs = doc.select("div > p > a[data_ue_src]");
         String releaseDate = doc.select("span[objparam='fieldname:DateTime']").first().text();
         String author = doc.select("span[objparam='fieldname:Author']").first().text();
+        String fileName = doc.select("div[objid=6014]").first().text();
         for (Element element : divs) {
             String fileUrl = element.attr("data_ue_src");
             SpiderStateGrid spiderStateGrid = new SpiderStateGrid()
                     .setTitle(title)
-                    .setArticleUrl(URLEnum.BUSINESS_OUTLET_INFORMATION.getValue())
+                    .setArticleUrl(url)
                     .setFileUrl(new StringBuilder().append(BASE_URL).append(fileUrl).toString())
                     .setRemark(remark)
                     .setReleaseDate(releaseDate)
-                    .setAuthor(author);
+                    .setAuthor(author)
+                    .setFileName(fileName);
             spiderStateGridMapper.insert(spiderStateGrid);
         }
     }
@@ -138,39 +140,33 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
                 .setTitle(title)
                 .setRemark(remark)
                 .setNotice(notice)
-                .setArticleUrl(URLEnum.REGULAR_REGULATIONS.getValue())
+                .setArticleUrl(url)
                 .setReleaseDate(releaseDate)
                 .setAuthor(author);
         spiderStateGridMapper.insert(spiderStateGrid);
     }
 
     @Override
-    public void spider(){
+    public void spider() {
         getPage1();
         List<String> images = new ArrayList<>();
         images.add(URLEnum.COMPANY_QUALIFICATION.getValue());
         images.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_1.getValue());
         images.add(URLEnum.MANAGEMENT_MEASURES_FOR_ELECTRIC_POWER_RELIABILITY.getValue());
-        images.stream().forEach(image->{
-            getHtmlImage(image);
-        });
+        images.stream().forEach(image->{getHtmlImage(image);});
         List<String> files = new ArrayList<>();
         files.add(URLEnum.BUSINESS_OUTLET_INFORMATION.getValue());
         files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_1.getValue());
         files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_2.getValue());
         files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_3.getValue());
         files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_4.getValue());
-        files.stream().forEach(file->{
-            getHtmlFile(file);
-        });
+        files.stream().forEach(file -> {getHtmlFile(file);});
         List<String> notices = new ArrayList<>();
         notices.add(URLEnum.POWER_SUPPLY_QUALITY_STANDARD.getValue());
         notices.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_2.getValue());
         notices.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_3.getValue());
         notices.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_4.getValue());
-        files.stream().forEach(notice ->{
-            getNotice(notice);
-        });
+        notices.stream().forEach(notice -> {getNotice(notice);});
     }
 
 }
