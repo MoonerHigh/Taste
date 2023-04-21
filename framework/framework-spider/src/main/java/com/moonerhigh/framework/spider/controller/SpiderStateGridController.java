@@ -25,4 +25,9 @@ public class SpiderStateGridController {
     public void spider(){
         spiderStateGridService.spider();
     }
+
+    @GetMapping("/driver")
+    public void driver(){
+        spiderStateGridService.driver();
+    }
 }

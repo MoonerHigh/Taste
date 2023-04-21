@@ -15,5 +15,9 @@ public interface SpiderStateGridService extends IService<SpiderStateGrid> {
      * 分类抓取数据
      */
     void spider();
+    /**
+     * 使用webDriver点击按钮获取数据
+     */
+    void driver();
 }
 

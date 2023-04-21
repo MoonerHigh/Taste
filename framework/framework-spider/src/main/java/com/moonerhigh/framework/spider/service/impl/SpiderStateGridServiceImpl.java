@@ -12,6 +12,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -153,20 +156,38 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         images.add(URLEnum.COMPANY_QUALIFICATION.getValue());
         images.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_1.getValue());
         images.add(URLEnum.MANAGEMENT_MEASURES_FOR_ELECTRIC_POWER_RELIABILITY.getValue());
-        images.stream().forEach(image->{getHtmlImage(image);});
+        images.stream().forEach(image -> {
+            getHtmlImage(image);
+        });
         List<String> files = new ArrayList<>();
         files.add(URLEnum.BUSINESS_OUTLET_INFORMATION.getValue());
         files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_1.getValue());
         files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_2.getValue());
         files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_3.getValue());
         files.add(URLEnum.SUZHOU_OPEN_CAPACITY_REPORT_QUARTER_4.getValue());
-        files.stream().forEach(file -> {getHtmlFile(file);});
+        files.stream().forEach(file -> {
+            getHtmlFile(file);
+        });
         List<String> notices = new ArrayList<>();
         notices.add(URLEnum.POWER_SUPPLY_QUALITY_STANDARD.getValue());
         notices.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_2.getValue());
         notices.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_3.getValue());
         notices.add(URLEnum.SUZHOU_POWER_SUPPLY_COMPANY_GRID_ACCESS_RESTRICTION_LIST_QUARTER_4.getValue());
-        notices.stream().forEach(notice -> {getNotice(notice);});
+        notices.stream().forEach(notice -> {
+            getNotice(notice);
+        });
     }
-
+    @Override
+    public void driver() {
+        System.getProperty("webdriver.chrome.driver","/home/hilbert/chromedriver_linux64/chromedriver");
+        ChromeDriver chromeDriver = new ChromeDriver();
+        chromeDriver.get(URLEnum.MAINTENANCE_ANNOUNCEMENT.getValue());
+        // 获取要点击的元素
+        WebElement element = chromeDriver.findElement(By.cssSelector("button[data-v-e5390f1e]"));
+        // 点击元素
+        element.click();
+        String pageSource = chromeDriver.getPageSource();
+        log.info("点击按钮后：{}",pageSource);
+        // 解析点击后的页面
+    }
 }
