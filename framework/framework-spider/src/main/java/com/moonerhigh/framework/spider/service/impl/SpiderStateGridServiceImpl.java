@@ -12,10 +12,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -183,44 +179,58 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
     }
 
 
-    @Override
-    public void driver() {
-
-    }
-
-    @Override
     @SneakyThrows
-    public void getPage2() {
+    @Transactional(rollbackFor = Exception.class)
+    public void getTable(String href, String text) {
         Document document;
-        document = Jsoup.connect(URLEnum.POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE.getValue()).get();
+        document = Jsoup.connect(href).get();
         String html = document.body().html();
         Document doc = Jsoup.parse(html);
-        Elements links = doc.select("div > ul > li > a[href]");
+//        String releaseDate = doc.select("span[objparam='fieldname:DateTime']").first().text();
+//        String author = doc.select("span[objparam='fieldname:Author']").first().text();
+        Elements tables = doc.select("table");
+        String notice = null;
+        for (Element table : tables) {
+            notice = new StringBuilder().append(table.text()).toString();
+        }
+        log.info("正文{}", notice);
+        SpiderStateGrid spiderStateGrid = new SpiderStateGrid()
+                .setArticleUrl(href)
+                .setTitle(text)
+                .setRemark(text)
+//                .setReleaseDate(releaseDate)
+//                .setAuthor(author)
+                .setNotice(notice);
+        spiderStateGridMapper.insert(spiderStateGrid);
+    }
+
+    @SneakyThrows
+    public void getIndex(String url) {
+        Document document;
+        document = Jsoup.connect(url).get();
+        String html = document.body().html();
+        Document doc = Jsoup.parse(html);
+        Elements links = doc.select("div[objid=6009] > ul > li > a[href]");
         links.forEach(link -> {
             String href = new StringBuilder().append(BASE_URL).append(link.attr("href")).toString();
             String remark = link.text();
             log.info("链接:{}", href);
             log.info("标题:{}", remark);
-            getTable(href, link.text());
-//            getNotice(new StringBuilder().append(BASE_URL).append(link.attr("href")).toString());
+            getTable(href, remark);
+            getHtmlFile(href);
         });
     }
 
-    @SneakyThrows
-    private void getTable(String href, String text) {
-        Document document;
-        document = Jsoup.connect(href).get();
-        String html = document.body().html();
-        Document doc = Jsoup.parse(html);
-        Elements tables = doc.select("table");
-        tables.forEach(table -> {
-            Elements trs = table.select("tr");
-            trs.forEach(tr -> {
-                Elements tds = tr.select("td");
-                tds.forEach(td -> {
-                    log.info("td:{}", td.text());
-                });
-            });
-        });
+    @Override
+    public void getPage2() {
+        getIndex(URLEnum.POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE_1.getValue());
+        getIndex(URLEnum.POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE_2.getValue());
+    }
+
+    @Override
+    public void getPage3() {
+        getIndex(URLEnum.REGULAR_REGULATIONS_1.getValue());
+        getIndex(URLEnum.REGULAR_REGULATIONS_2.getValue());
+        getIndex(URLEnum.REGULAR_REGULATIONS_3.getValue());
     }
 }

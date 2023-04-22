@@ -22,13 +22,19 @@ public enum URLEnum {
 
     BUSINESS_OUTLET_INFORMATION("营业网点信息","http://www.js.sgcc.com.cn/html/szgdgs/col2882/2019-07/19/20190719154004592917345_1.html"),
 
-    REGULAR_REGULATIONS("政策法规","http://www.js.sgcc.com.cn/html/szgdgs/col2887/column_2887_1.html"),
+    REGULAR_REGULATIONS_1("政策法规","http://www.js.sgcc.com.cn/html/szgdgs/col2887/column_2887_1.html"),
 
-    POWER_SUPPLY_QUALITY_STANDARD("供电质量标准","http://www.js.sgcc.com.cn/html/szgdgs/col2887/2022-07/21/20220721121415989514310_1.html"),
+    REGULAR_REGULATIONS_2("政策法规","http://www.js.sgcc.com.cn/html/szgdgs/col2887/column_2887_2.html"),
+
+    REGULAR_REGULATIONS_3("政策法规","http://www.js.sgcc.com.cn/html/szgdgs/col2887/column_2887_3.html"),
+
+    POWER_SUPPLY_QUALITY_STANDARD("供电质量标准","http://www.js.s gcc.com.cn/html/szgdgs/col2887/2022-07/21/20220721121415989514310_1.html"),
 
     MANAGEMENT_MEASURES_FOR_ELECTRIC_POWER_RELIABILITY("电力可靠性管理办法","http://www.js.sgcc.com.cn/html/szgdgs/col2887/2022-05/05/20220505111449584486302_1.html"),
 
-    POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE("供电质量及“两率”情况","http://www.js.sgcc.com.cn/html/szgdgs/col2886/column_2886_1.html"),
+    POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE_1("供电质量及“两率”情况","http://www.js.sgcc.com.cn/html/szgdgs/col2886/column_2886_1.html"),
+
+    POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE_2("供电质量及“两率”情况","http://www.js.sgcc.com.cn/html/szgdgs/col2886/column_2886_2.html"),
 
     MAINTENANCE_ANNOUNCEMENT("电网检修公告","https://www.95598.cn/osgweb/blackoutNotice?partNo=P050302&province=320000&city=320500&county=320571&powerCutNo=01"),
 

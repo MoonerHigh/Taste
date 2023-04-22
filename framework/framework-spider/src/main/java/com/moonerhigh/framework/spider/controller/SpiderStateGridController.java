@@ -22,16 +22,17 @@ public class SpiderStateGridController {
     private SpiderStateGridService spiderStateGridService;
 
     @GetMapping("/spider")
-    public void spider(){
+    public void spider() {
         spiderStateGridService.spider();
     }
 
-    @GetMapping("/driver")
-    public void driver(){
-        spiderStateGridService.driver();
-    }
     @GetMapping("/getPage2")
-    public void getPage2(){
+    public void getPage2() {
         spiderStateGridService.getPage2();
+    }
+
+    @GetMapping("/getPage3")
+    public void getPage3() {
+        spiderStateGridService.getPage3();
     }
 }

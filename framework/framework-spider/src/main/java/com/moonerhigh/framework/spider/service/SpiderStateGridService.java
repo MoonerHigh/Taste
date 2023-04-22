@@ -18,10 +18,13 @@ public interface SpiderStateGridService extends IService<SpiderStateGrid> {
     /**
      * 使用webDriver点击按钮获取数据
      */
-    void driver();
     /**
      * 爬取供电质量及“两率”情况
      */
     void getPage2();
+    /**
+     * 政策法规
+     */
+    void getPage3();
 }
 
