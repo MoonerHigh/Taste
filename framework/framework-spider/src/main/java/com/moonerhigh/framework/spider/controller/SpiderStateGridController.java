@@ -30,4 +30,8 @@ public class SpiderStateGridController {
     public void driver(){
         spiderStateGridService.driver();
     }
+    @GetMapping("/getPage2")
+    public void getPage2(){
+        spiderStateGridService.getPage2();
+    }
 }

@@ -13,14 +13,18 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-import static com.moonerhigh.framework.spider.constants.Const.*;
+import static com.moonerhigh.framework.spider.constants.Const.ADDRESS_REGEX;
+import static com.moonerhigh.framework.spider.constants.Const.BASE_URL;
 import static com.moonerhigh.framework.spider.utils.SplitUtil.getMapByRegex;
 
 /**
@@ -177,17 +181,46 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
             getNotice(notice);
         });
     }
+
+
     @Override
     public void driver() {
-        System.getProperty("webdriver.chrome.driver","/home/hilbert/chromedriver_linux64/chromedriver");
-        ChromeDriver chromeDriver = new ChromeDriver();
-        chromeDriver.get(URLEnum.MAINTENANCE_ANNOUNCEMENT.getValue());
-        // 获取要点击的元素
-        WebElement element = chromeDriver.findElement(By.cssSelector("button[data-v-e5390f1e]"));
-        // 点击元素
-        element.click();
-        String pageSource = chromeDriver.getPageSource();
-        log.info("点击按钮后：{}",pageSource);
-        // 解析点击后的页面
+
+    }
+
+    @Override
+    @SneakyThrows
+    public void getPage2() {
+        Document document;
+        document = Jsoup.connect(URLEnum.POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE.getValue()).get();
+        String html = document.body().html();
+        Document doc = Jsoup.parse(html);
+        Elements links = doc.select("div > ul > li > a[href]");
+        links.forEach(link -> {
+            String href = new StringBuilder().append(BASE_URL).append(link.attr("href")).toString();
+            String remark = link.text();
+            log.info("链接:{}", href);
+            log.info("标题:{}", remark);
+            getTable(href, link.text());
+//            getNotice(new StringBuilder().append(BASE_URL).append(link.attr("href")).toString());
+        });
+    }
+
+    @SneakyThrows
+    private void getTable(String href, String text) {
+        Document document;
+        document = Jsoup.connect(href).get();
+        String html = document.body().html();
+        Document doc = Jsoup.parse(html);
+        Elements tables = doc.select("table");
+        tables.forEach(table -> {
+            Elements trs = table.select("tr");
+            trs.forEach(tr -> {
+                Elements tds = tr.select("td");
+                tds.forEach(td -> {
+                    log.info("td:{}", td.text());
+                });
+            });
+        });
     }
 }
