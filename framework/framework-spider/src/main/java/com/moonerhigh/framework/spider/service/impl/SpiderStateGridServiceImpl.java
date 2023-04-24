@@ -8,6 +8,7 @@ import com.moonerhigh.framework.spider.service.SpiderStateGridService;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -218,6 +219,7 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
             log.info("标题:{}", remark);
             getTable(href, remark);
             getHtmlFile(href);
+            getHtmlImage(href);
         });
     }
 
@@ -232,5 +234,29 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         getIndex(URLEnum.REGULAR_REGULATIONS_1.getValue());
         getIndex(URLEnum.REGULAR_REGULATIONS_2.getValue());
         getIndex(URLEnum.REGULAR_REGULATIONS_3.getValue());
+    }
+
+
+    @Override
+    @SneakyThrows
+    public void getPage4() {
+
+        Connection.Response response = Jsoup.connect(URLEnum.MAINTENANCE_ANNOUNCEMENT_DATA_1.getValue())
+                .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36")
+                .header("Accept", "application/json;charset=UTF-8")
+                .header("Accept-Encoding", "gzip, deflate, br")
+                .header("appKey", "3def6c365d284881bf1a9b2b502ee68c")
+                .header("keyCode", "104241452432120790393900806308658")
+                .header("Referer", "https://www.95598.cn/osgweb/blackoutNotice?partNo=P050302&province=320000&city=320500&county=320571&powerCutNo=01")
+                .header("source", "0901")
+                .header("Cookie", "acw_tc=ac11000116823181197992596e00a4ced45d6f5057aad158630c9fc0cab9b1; ariaDefaultTheme=undefined; JSESSIONID=6C53F6848338C1D825EC9E9712F3A45E")
+                .header("Host", "www.95598.cn")
+                .header("Origin", "https://www.95598.cn")
+                .ignoreContentType(false)
+                .execute();
+        Document document = response.parse();
+        String body = document.body().html();
+        log.info("响应体:{}", body);
+
     }
 }

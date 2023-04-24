@@ -26,5 +26,9 @@ public interface SpiderStateGridService extends IService<SpiderStateGrid> {
      * 政策法规
      */
     void getPage3();
+    /**
+     * 政策法规
+     */
+    void getPage4();
 }
 

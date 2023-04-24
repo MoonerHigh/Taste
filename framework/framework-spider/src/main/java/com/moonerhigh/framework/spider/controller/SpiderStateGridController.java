@@ -35,4 +35,9 @@ public class SpiderStateGridController {
     public void getPage3() {
         spiderStateGridService.getPage3();
     }
+
+    @GetMapping("/getPage4")
+    public void getPage4() {
+        spiderStateGridService.getPage4();
+    }
 }
