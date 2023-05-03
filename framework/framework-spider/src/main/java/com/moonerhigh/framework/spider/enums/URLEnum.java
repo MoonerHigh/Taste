@@ -62,5 +62,4 @@ public enum URLEnum {
 
     private final String value;
 
-
 }
