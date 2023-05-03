@@ -236,8 +236,6 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
 //        getIndex(URLEnum.REGULAR_REGULATIONS_3.getValue());
 //    }
 
-
-    @Override
     @SneakyThrows
     public void getPage4() {
 
