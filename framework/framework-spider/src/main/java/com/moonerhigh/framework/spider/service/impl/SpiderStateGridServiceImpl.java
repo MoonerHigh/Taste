@@ -223,21 +223,19 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
         });
     }
 
-    @Override
-    public void getPage2() {
-        getIndex(URLEnum.POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE_1.getValue());
-        getIndex(URLEnum.POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE_2.getValue());
-    }
+//    @Override
+//    public void getPage2() {
+//        getIndex(URLEnum.POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE_1.getValue());
+//        getIndex(URLEnum.POWER_SUPPLY_QUALITY_AND_VOLTAGE_QUALIFICATION_RATE_2.getValue());
+//    }
+//
+//    @Override
+//    public void getPage3() {
+//        getIndex(URLEnum.REGULAR_REGULATIONS_1.getValue());
+//        getIndex(URLEnum.REGULAR_REGULATIONS_2.getValue());
+//        getIndex(URLEnum.REGULAR_REGULATIONS_3.getValue());
+//    }
 
-    @Override
-    public void getPage3() {
-        getIndex(URLEnum.REGULAR_REGULATIONS_1.getValue());
-        getIndex(URLEnum.REGULAR_REGULATIONS_2.getValue());
-        getIndex(URLEnum.REGULAR_REGULATIONS_3.getValue());
-    }
-
-
-    @Override
     @SneakyThrows
     public void getPage4() {
 
