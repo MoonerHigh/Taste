@@ -252,7 +252,7 @@ public class SpiderStateGridServiceImpl extends ServiceImpl<SpiderStateGridMappe
                 .header("Cookie", "acw_tc=ac11000116823181197992596e00a4ced45d6f5057aad158630c9fc0cab9b1; ariaDefaultTheme=undefined; JSESSIONID=6C53F6848338C1D825EC9E9712F3A45E")
                 .header("Host", "www.95598.cn")
                 .header("Origin", "https://www.95598.cn")
-                .ignoreContentType(false)
+                .ignoreContentType(true)
                 .execute();
         Document document = response.parse();
         String body = document.body().html();
