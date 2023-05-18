@@ -28,14 +28,8 @@
 
         <dependency>
             <groupId>com.moonerhigh</groupId>
-            <artifactId>framework-security</artifactId>
+            <artifactId>taste-spring-boot-starter-security</artifactId>
             <version>${security.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.moonerhigh</groupId>
-            <artifactId>taste-spider</artifactId>
-            <version>${spider.version}</version>
         </dependency>
 
         <dependency>

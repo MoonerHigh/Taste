@@ -16,8 +16,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>framework-common</module>
-        <module>framework-security</module>
-        <module>framework-spider</module>
+        <module>taste-spring-boot-starter-security</module>
     </modules>
     <dependencies>
         <dependency>
@@ -78,6 +77,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 </project>
