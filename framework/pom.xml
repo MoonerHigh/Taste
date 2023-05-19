@@ -18,6 +18,21 @@
         <module>framework-common</module>
         <module>taste-spring-boot-starter-security</module>
     </modules>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${autoconfigure.version}</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
+
+
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -77,11 +92,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -108,13 +108,6 @@
                 <version>${springboot.version}</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-autoconfigure</artifactId>
-                <version>${autoconfigure.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 

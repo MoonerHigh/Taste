@@ -16,7 +16,6 @@
         <security.version>1.0-SNAPSHOT</security.version>
         <common.version>1.0-SNAPSHOT</common.version>
         <smart-doc.version>2.6.7</smart-doc.version>
-        <spider.version>1.0-SNAPSHOT</spider.version>
     </properties>
 
     <dependencies>
