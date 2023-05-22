@@ -12,4 +12,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties
 public class SecurityProperties {
 
+    /**
+     * HTTP 请求时，访问令牌的请求 Header
+     */
+
+    private String tokenHeader;
+
 }

@@ -17,6 +17,7 @@
     <modules>
         <module>framework-common</module>
         <module>taste-spring-boot-starter-security</module>
+        <module>taste-spring-boot-starter-web</module>
     </modules>
 
 

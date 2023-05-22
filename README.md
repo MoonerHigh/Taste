@@ -15,7 +15,7 @@
 
 ## 开发环境
 
-|  工具 | 版本号 | 下载 |
-| --- | --- | --- |
-| JDK | 17 | https://download.oracle.com/java/17/latest/jdk-17_windows-x64_bin.exe |
-| Mysql | 5.7 | https://www.mysql.com/ |
+| 工具    | 版本号 | 下载 |
+|-------| --- | --- |
+| JDK   | 17 | https://download.oracle.com/java/17/latest/jdk-17_windows-x64_bin.exe |
+| MySQL | 5.7 | https://www.mysql.com/ |

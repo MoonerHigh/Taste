@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
  */
 @Configuration
 // 开启方法级别的权限控制 EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)注解已被废弃
-@EnableMethodSecurity(prePostEnabled = true,securedEnabled = true)
+@EnableMethodSecurity(securedEnabled = true)
 public class WebSecurityConfigurerAdapter {
 
     @Bean
