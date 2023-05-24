@@ -1,4 +1,4 @@
-package com.moonerhigh.framework.web;
+package com.moonerhigh.framework.web.config;
 
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

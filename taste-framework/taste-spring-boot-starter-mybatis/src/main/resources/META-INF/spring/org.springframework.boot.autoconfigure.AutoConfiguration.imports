@@ -1,0 +1,2 @@
+com.moonerhigh.framework.mybatis.config.MyBatisAutoConfiguration
+com.moonerhigh.framework.datasource.config.DataSourceAutoConfiguration

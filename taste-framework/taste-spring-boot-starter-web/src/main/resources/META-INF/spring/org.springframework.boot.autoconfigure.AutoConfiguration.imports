@@ -1,0 +1,2 @@
+com.moonerhigh.framework.web.config.WebAutoConfiguration
+com.moonerhigh.framework.web.fastjson2.FastJsonAutoConfiguration

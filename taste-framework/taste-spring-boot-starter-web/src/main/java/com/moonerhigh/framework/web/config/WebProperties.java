@@ -1,8 +1,9 @@
-package com.moonerhigh.framework.web;
+package com.moonerhigh.framework.web.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
 
@@ -27,7 +28,7 @@ public class WebProperties {
     public static class Api {
 
 
-//        @NotEmpty(message = "API 前缀不能为空")
+        @NotEmpty(message = "API 前缀不能为空")
         private String prefix;
 
 
