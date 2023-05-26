@@ -1,17 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.moonerhigh</groupId>
-        <artifactId>Taste</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-
+    <groupId>com.moonerhigh</groupId>
     <artifactId>taste-dependencies</artifactId>
-    <name>dependencies</name>
+    <version>${reversion}</version>
+    <name>${artifactId}</name>
     <description>对项目依赖进行统一管理</description>
+    <packaging>pom</packaging>
 
     <properties>
+        <reversion>1.0-SNAPSHOT</reversion>
         <lombok.version>1.18.26</lombok.version>
         <springboot.version>3.0.5</springboot.version>
         <jdbc.version>8.0.32</jdbc.version>
@@ -20,13 +18,50 @@
         <fastjson2.version>2.0.26</fastjson2.version>
         <utils.common-lang.version>3.12.0</utils.common-lang.version>
         <redis.version>3.0.5</redis.version>
-        <autoconfigure.version>3.0.6</autoconfigure.version>
         <validator.version>8.0.0.Final</validator.version>
         <jwt.version>0.11.5</jwt.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- 统一依赖管理 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.moonerhigh</groupId>
+                <artifactId>taste-spring-boot-starter-mybatis</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.moonerhigh</groupId>
+                <artifactId>taste-spring-boot-starter-web</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.moonerhigh</groupId>
+                <artifactId>taste-spring-boot-starter-redis</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.moonerhigh</groupId>
+                <artifactId>framework-common</artifactId>
+                <version>${reversion}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.moonerhigh</groupId>
+                <artifactId>taste-server</artifactId>
+                <version>${reversion}</version>
+            </dependency>
             <!-- Spring 核心 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -110,7 +145,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-configuration-processor</artifactId>
-                <version>${autoconfigure.version}</version>
+                <version>${springboot.version}</version>
             </dependency>
 
 
@@ -127,6 +162,7 @@
                 <artifactId>jjwt-api</artifactId>
                 <version>${jwt.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
 

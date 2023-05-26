@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.moonerhigh</groupId>
     <artifactId>Taste</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
         <module>taste-framework</module>
@@ -25,6 +25,8 @@
                 <groupId>com.moonerhigh</groupId>
                 <artifactId>taste-dependencies</artifactId>
                 <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
